@@ -10,9 +10,9 @@ https://davedavis.atlassian.net/jira/software/c/projects/PDFIT/boards/4/backlog
 
 ## Application Architecture 
 
-![](docs/images/architecture draft 1.png)
 
-[<img alt="architecture" width="40px" src="docs/images/architecture draft 1.png" />]
+
+[<img alt="architecture" src="docs/images/architecture draft 1.png" />]
 
 
 
