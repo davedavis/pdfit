@@ -31,3 +31,9 @@ https://davedavis.atlassian.net/jira/software/c/projects/PDFIT/boards/4/backlog
 - Add decluttered resource to the DB
 - Add ONAP standard CRUD methods
 - 
+
+
+
+
+## Ideas 
+- WaveNet service
