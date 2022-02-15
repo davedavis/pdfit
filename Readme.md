@@ -1,4 +1,5 @@
-#PDFit
+# PDFit
+
 PDFit.io is a webservice that accepts a URL from a user and returns
 a de-cluttered, ad-free and readability.js inspired simple format or
 PDF for use with e-ink and e-reader devices like the remarkable or
@@ -10,6 +11,9 @@ https://davedavis.atlassian.net/jira/software/c/projects/PDFIT/boards/4/backlog
 ## Application Architecture 
 
 ![](docs/images/architecture draft 1.png)
+
+[<img alt="architecture" width="40px" src="docs/images/architecture draft 1.png" />]
+
 
 
 ## Sprint 0 requirements
