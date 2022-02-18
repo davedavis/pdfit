@@ -64,7 +64,59 @@
             <artifactId>crux</artifactId>
             <version>3.0.1</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>com.github.jhonnymertz</groupId>
+            <artifactId>java-wkhtmltopdf-wrapper</artifactId>
+            <version>1.1.13-RELEASE</version>
+        </dependency>
+
+
+
+        <!-- only this origin -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <!-- add belows for these dependencies version is not 4.0.0 when automatically generated -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>net.dankito.readability4j</groupId>
+            <artifactId>readability4j</artifactId>
+            <version>1.0.8</version>
+        </dependency>
+
+
+
+
+
+
+
+
+
     </dependencies>
+
+
+
+
 
     <build>
         <plugins>

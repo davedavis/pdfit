@@ -1,4 +1,4 @@
-package io.pdfit.declutter;
+package io.pdfit.declutterservice;
 import com.chimbori.crux.articles.Article;
 import com.chimbori.crux.articles.ArticleExtractor;
 import okhttp3.HttpUrl;
