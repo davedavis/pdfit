@@ -1,6 +1,6 @@
-# PDFit
+# Klutter
 
-PDFit.io is a webservice that accepts a URL from a user and returns
+Klutter.io is a webservice that accepts a URL from a user and returns
 a de-cluttered, ad-free and readability.js inspired simple format or
 PDF for use with e-ink and e-reader devices like the remarkable or
 kindle readers. 
@@ -25,7 +25,7 @@ https://davedavis.atlassian.net/jira/software/c/projects/PDFIT/boards/4/backlog
 
 
 ## Sprint 0 strategy
-- Build out the declutter service using the Jsoup and crux libraries.
+- Build out the declutter service using the Jsoup and r4j libraries.
 - Receive a URL in either the body or a URL parameter
 - Set up API V1
 - Add decluttered resource to the DB

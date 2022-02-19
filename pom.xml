@@ -6,13 +6,15 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
-    <groupId>io.pdfit</groupId>
-    <artifactId>readlater</artifactId>
+    <groupId>io.klutter</groupId>
+    <artifactId>Klutter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>pdfit</name>
-    <description>pdfit</description>
+    <name>Klutter</name>
+    <description>Klutter is a tool that removes clutter like ads, menus,
+        navigation, sidebars, headers and footers from articles and documents
+        and provides a more usable e-ink version in PDF format.</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -58,12 +60,7 @@
             <version>1.14.3</version>
         </dependency>
 
-        <!-- Java implementation of readability.js from Mozilla-->
-        <dependency>
-            <groupId>com.chimbori.crux</groupId>
-            <artifactId>crux</artifactId>
-            <version>3.0.1</version>
-        </dependency>
+
 
 
         <dependency>
@@ -80,7 +77,6 @@
             <artifactId>selenium-java</artifactId>
             <version>4.0.0</version>
         </dependency>
-        <!-- add belows for these dependencies version is not 4.0.0 when automatically generated -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
@@ -97,14 +93,29 @@
             <version>4.0.0</version>
         </dependency>
 
-
+        <!--Mozilla Readability wrapper-->
         <dependency>
             <groupId>net.dankito.readability4j</groupId>
             <artifactId>readability4j</artifactId>
             <version>1.0.8</version>
         </dependency>
 
+        <!-- Flesch library for calculating reading difficulty.-->
+        <dependency>
+            <groupId>io.whelk.flesch.kincaid</groupId>
+            <artifactId>whelk-flesch-kincaid</artifactId>
+            <version>0.1.8</version>
+        </dependency>
 
+
+
+
+        <!--  Web driver manager so that I don't have to package an executable with the app.-->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.1.0</version>
+        </dependency>
 
 
 
