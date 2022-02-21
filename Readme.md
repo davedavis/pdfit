@@ -16,6 +16,11 @@ https://davedavis.atlassian.net/jira/software/c/projects/PDFIT/boards/4/backlog
 
 
 
+## In Mem testing DB
+- http://localhost:8080/h2-console/
+- jdbc:h2:mem:testdatabase
+- No user or pass.
+
 ## Sprint 0 requirements
 - Introduction to Application (Overall),
 - List of User Stories (Overall),

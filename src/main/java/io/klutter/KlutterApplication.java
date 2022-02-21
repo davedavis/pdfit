@@ -1,7 +1,7 @@
 package io.klutter;
 
-import io.klutter.dao.KdocRepository;
-import io.klutter.entity.Kdoc;
+import io.klutter.data.KdocRepository;
+import io.klutter.models.Kdoc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -9,7 +9,7 @@ import org.springframework.context.event.EventListener;
 
 //Add the scanBasePackages parameter to the annotation as I added my services in
 //separate packages so, they need to be configured on application start.
-@SpringBootApplication(scanBasePackages = {"io.klutter.declutterservice", "io.klutter.pdfservice", "io.klutter.dao"} )
+@SpringBootApplication(scanBasePackages = {"io.klutter.models", "io.klutter.controllers", "io.klutter.data", "io.klutter.services"} )
 public class KlutterApplication {
 
     private final KdocRepository kdocRepository;

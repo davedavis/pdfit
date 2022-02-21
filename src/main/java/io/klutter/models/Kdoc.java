@@ -1,11 +1,12 @@
-package io.klutter.entity;
+package io.klutter.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Kdoc")
-public class Kdoc implements Serializable {
+//public class Kdoc implements Serializable {
+public class Kdoc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
