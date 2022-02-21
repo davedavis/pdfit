@@ -33,7 +33,11 @@ https://davedavis.atlassian.net/jira/software/c/projects/PDFIT/boards/4/backlog
 - 
 
 
+## ToDo
+Add user, title, excerpt, byline, content, ease, grade and tag array to model.
+
 
 
 ## Ideas 
 - WaveNet service
+- Text analytics and sentiment analysis service

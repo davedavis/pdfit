@@ -1,9 +1,8 @@
-package io.klutter.declutterservice;
+package io.klutter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.whelk.flesch.kincaid.ReadabilityCalculator;
 import net.dankito.readability4j.Readability4J;
-import okhttp3.HttpUrl;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Safelist;
@@ -17,9 +16,9 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1")
-public class DeclutterService {
+public class DocumentService {
 
-    @RequestMapping("/declutter")
+    @RequestMapping("/documents")
     public String index() throws IOException {
 
         String url = "https://realpython.com/python-sockets/";
@@ -67,6 +66,10 @@ public class DeclutterService {
 
         // Check it's working
         System.out.println(ease + " " + grade);
+
+        // Testing the sizing of the document for Azure
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>   " + extractedContentPlainText.length());
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>   " + WordUtils.wrap(extractedContentPlainText, 40));
 
         // ToDo: Add user, title, excerpt, byline, content, ease, grade and tag array to model.
 
