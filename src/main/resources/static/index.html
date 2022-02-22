@@ -66,16 +66,46 @@
     <h1>Welcome to Klutter</h1>
     <p class="lead">Submit your URL below to get a decluttered, ad-free version optimized for e-ink devices like
     remarkable or kindle.</p>
-    <form>
+
+<!--    <form action="/api/v1/kdocs/url" method="POST">-->
+    <form id = "klutter" >
       <div class="mb-3">
         <label for="url" class="form-label">URL to declutter</label>
-        <input type="url" class="form-control" id="url" aria-describedby="urlHelp">
+        <input name = "url" type="url" class="form-control" id="url" aria-describedby="urlHelp">
         <div id="emailHelp" class="form-text">You can save your document in your account or download immediately without an account..</div>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+<!--      <button type="submit" class="btn btn-primary">Submit</button>-->
+      <button onclick="post()" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </main>
+
+<script>
+  function post(path, params, method='post') {
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less verbose if you use one.
+    const form = document.createElement('form');
+    form.method = method;
+    form.action = path;
+
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = key;
+        hiddenField.value = params[key];
+
+        form.appendChild(hiddenField);
+      }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+
+</script>
 
 
 

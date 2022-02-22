@@ -46,3 +46,16 @@ Add user, title, excerpt, byline, content, ease, grade and tag array to model.
 ## Ideas 
 - WaveNet service
 - Text analytics and sentiment analysis service
+
+
+## Sample Payload
+{
+"title": "FirstPost 1",
+"url": "https://www.klutter.io/FirstPost",
+"excerpt": "FirstPost",
+"byline": "FirstPost",
+"content": "FirstPost",
+"ease": 1.0,
+"grade": 1.0,
+"pdf": "FirstPost"
+}

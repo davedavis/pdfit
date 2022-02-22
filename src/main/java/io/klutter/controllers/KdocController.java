@@ -9,19 +9,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+//ToDo: Add user auth so that only a signed in users are returned in the get.
+
+
 @RestController
 @RequestMapping("/kdocs")
 public class KdocController {
 
     private final KdocService kdocService;
 
-
     public KdocController(KdocService kdocService) {
         this.kdocService = kdocService;
     }
 
     @GetMapping
-    public List<Kdoc> getAllKdocs(){
+    public List<Kdoc> listAllKdocs(){
         return kdocService.getAllKdocs();
     }
 }

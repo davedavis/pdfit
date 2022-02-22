@@ -9,7 +9,11 @@ import org.springframework.context.event.EventListener;
 
 //Add the scanBasePackages parameter to the annotation as I added my services in
 //separate packages so, they need to be configured on application start.
-@SpringBootApplication(scanBasePackages = {"io.klutter.models", "io.klutter.controllers", "io.klutter.data", "io.klutter.services"} )
+@SpringBootApplication(scanBasePackages = {"io.klutter.models",
+        "io.klutter.controllers",
+        "io.klutter.data",
+        "io.klutter.services",
+        "io.klutter.web"} )
 public class KlutterApplication {
 
     private final KdocRepository kdocRepository;

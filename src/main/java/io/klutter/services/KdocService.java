@@ -1,34 +1,84 @@
 package io.klutter.services;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.klutter.data.KdocRepository;
 import io.klutter.models.Kdoc;
-import io.whelk.flesch.kincaid.ReadabilityCalculator;
-import net.dankito.readability4j.Readability4J;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.safety.Safelist;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
 public class KdocService {
 
-    private final KdocRepository kdocRepository;
+    @Autowired
+    KdocRepository kdocRepository;
 
-    public KdocService(KdocRepository kdocRepository) {
-        this.kdocRepository = kdocRepository;
-    }
+//    private final KdocRepository kdocRepository;
+//
+//    public KdocService(KdocRepository kdocRepository) {
+//        this.kdocRepository = kdocRepository;
+//    }
 
     public List<Kdoc> getAllKdocs(){
         return kdocRepository.findAll();
     }
+
+
+    @RequestMapping("/kdocs")
+    public List<Kdoc> listAllKdocs() {
+        return kdocRepository.findAll();
+    }
+
+    @RequestMapping("/kdocs/{kdocid}")
+    public Optional<Kdoc> listKdocsById(@PathVariable Long kdocid){
+
+        return kdocRepository.findById(kdocid);
+    }
+
+
+    // ToDo: Insert actual genertor logic here.
+    @RequestMapping(value = "/kdocs", method = RequestMethod.POST)
+    ResponseEntity<Kdoc> generateKdoc(@RequestBody Kdoc kdoc){
+        Kdoc savedKdoc = kdocRepository.save(kdoc);
+        return new ResponseEntity<Kdoc>(savedKdoc, HttpStatus.OK);
+    }
+
+// WORKING
+//    @RequestMapping(value = "/kdocs/url", method = RequestMethod.POST)
+//    ResponseEntity<String> generateKdocFromUrl(@RequestBody String url, @RequestParam(name = "url") String articleurl) {
+//        // Decode the URL encoded string if it's encoded.
+//        String result = java.net.URLDecoder.decode(url, StandardCharsets.UTF_8);
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>  " + articleurl );
+////        Kdoc savedKdoc = kdocRepository.save(kdoc);
+//        return new ResponseEntity<String>(url, HttpStatus.OK);
+//    }
+
+    @RequestMapping(value = "/kdocs/url", method = RequestMethod.POST)
+    ResponseEntity<Kdoc> generateKdocFromUrl(@RequestBody Kdoc url) {
+        // Decode the URL encoded string if it's encoded.
+        String result = java.net.URLDecoder.decode(url.getUrl(), StandardCharsets.UTF_8);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>  " + result);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>  " + url.getUrl());
+//        Kdoc savedKdoc = kdocRepository.save(kdoc);
+        return new ResponseEntity<Kdoc>(url, HttpStatus.OK);
+    }
+
+
+
+
+
+
+
 
 //    @RequestMapping("/documents")
 //    public String index()  {

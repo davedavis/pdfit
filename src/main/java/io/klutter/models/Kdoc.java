@@ -3,10 +3,13 @@ package io.klutter.models;
 import javax.persistence.*;
 import java.io.Serializable;
 
+
+// ToDo: JSR annotations for simple validation.
+
 @Entity
 @Table(name = "Kdoc")
-//public class Kdoc implements Serializable {
-public class Kdoc {
+public class Kdoc implements Serializable {
+//public class Kdoc {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +32,10 @@ public class Kdoc {
     private String content;
 
     @Column(name = "ease")
-    private Float ease;
+    private Double ease;
 
     @Column(name = "grade")
-    private Float grade;
+    private Double grade;
 
     @Column(name = "pdf")
     @Lob
@@ -42,7 +45,7 @@ public class Kdoc {
     public Kdoc() {
     }
 
-    public Kdoc(String url, String title, String excerpt, String byline, String content, Float ease, Float grade, String pdf) {
+    public Kdoc(String url, String title, String excerpt, String byline, String content, Double ease, Double grade, String pdf) {
         this.title = title;
         this.url = url;
         this.excerpt = excerpt;
@@ -93,19 +96,19 @@ public class Kdoc {
         this.content = content;
     }
 
-    public Float getEase() {
+    public Double getEase() {
         return ease;
     }
 
-    public void setEase(Float ease) {
+    public void setEase(Double ease) {
         this.ease = ease;
     }
 
-    public Float getGrade() {
+    public Double getGrade() {
         return grade;
     }
 
-    public void setGrade(Float grade) {
+    public void setGrade(Double grade) {
         this.grade = grade;
     }
 
