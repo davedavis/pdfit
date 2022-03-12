@@ -1,18 +1,30 @@
 package io.klutter.services;
 
+import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.HttpResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.klutter.data.KdocRepository;
 import io.klutter.models.Kdoc;
-import org.apache.commons.io.IOUtils;
+
+
+import io.whelk.flesch.kincaid.ReadabilityCalculator;
+import net.dankito.readability4j.Readability4J;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.safety.Safelist;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,20 +32,15 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class KdocService {
 
+    // Set up the repository reference.
     @Autowired
     KdocRepository kdocRepository;
-
-//    private final KdocRepository kdocRepository;
-//
-//    public KdocService(KdocRepository kdocRepository) {
-//        this.kdocRepository = kdocRepository;
-//    }
-
     public List<Kdoc> getAllKdocs(){
         return kdocRepository.findAll();
     }
 
 
+    // Set up endpoints.
     @RequestMapping("/kdocs")
     public List<Kdoc> listAllKdocs() {
         return kdocRepository.findAll();
@@ -45,42 +52,88 @@ public class KdocService {
         return kdocRepository.findById(kdocid);
     }
 
-
-    // ToDo: Insert actual genertor logic here.
+    // ToDo: Insert actual generator logic here.
     @RequestMapping(value = "/kdocs", method = RequestMethod.POST)
     ResponseEntity<Kdoc> generateKdoc(@RequestBody Kdoc kdoc){
         Kdoc savedKdoc = kdocRepository.save(kdoc);
-        return new ResponseEntity<Kdoc>(savedKdoc, HttpStatus.OK);
+        return new ResponseEntity<>(savedKdoc, HttpStatus.OK);
     }
 
-// WORKING
+    @PutMapping("/kdocs/{id}")
+    Kdoc replaceKdoc(@RequestBody Kdoc newKdoc, @PathVariable Long id) {
+
+        return kdocRepository.findById(id)
+                .map(kdoc -> {
+                    kdoc.setTitle(newKdoc.getTitle());
+                    kdoc.setUrl(newKdoc.getUrl());
+                    kdoc.setExcerpt(newKdoc.getExcerpt());
+                    kdoc.setByline(newKdoc.getByline());
+                    kdoc.setEase(newKdoc.getEase());
+                    kdoc.setGrade(newKdoc.getGrade());
+                    return kdocRepository.save(kdoc);
+                })
+                .orElseGet(() -> {
+                    newKdoc.setId(id);
+                    return kdocRepository.save(newKdoc);
+                });
+    }
+
+
+    // ToDo: Implement this for all fields.
+    @PatchMapping("/kdocs/{id}")
+    public ResponseEntity<Kdoc> updateKdocPartially(@PathVariable Long id, @RequestBody String json) {
+
+        Gson gson = new Gson();
+        // Object jsonObject = gson.fromJson(json, Object.class);
+        Kdoc jsonObject = gson.fromJson(json, Kdoc.class);
+
+        // ToDo Implement a comparator
+        System.out.println(jsonObject);
+
+        try {
+            Kdoc kdoc = kdocRepository.findById(id).get();
+            kdoc.setTitle("Test");
+            return new ResponseEntity<>(kdocRepository.save(kdoc), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+    @DeleteMapping("/kdocs/{id}")
+    ResponseEntity<String> deleteKdoc(@PathVariable Long id) {
+        kdocRepository.deleteById(id);
+        return new ResponseEntity<String>("Deleted", HttpStatus.OK);
+    }
+
+    // ToDo: Custom Exception Class with messages.
+
+
+
+
+    // ToDo: Implement receiving from front end.
+//    // Separate endpoint for generating a kdoc from web frontend.
 //    @RequestMapping(value = "/kdocs/url", method = RequestMethod.POST)
-//    ResponseEntity<String> generateKdocFromUrl(@RequestBody String url, @RequestParam(name = "url") String articleurl) {
+//    ResponseEntity<Kdoc> generateKdocFromUrl(@RequestBody Kdoc submittedKdoc) {
+//        System.out.println(submittedKdoc.toString());
 //        // Decode the URL encoded string if it's encoded.
-//        String result = java.net.URLDecoder.decode(url, StandardCharsets.UTF_8);
-//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>  " + articleurl );
-////        Kdoc savedKdoc = kdocRepository.save(kdoc);
-//        return new ResponseEntity<String>(url, HttpStatus.OK);
+//        String decoded = java.net.URLDecoder.decode(submittedKdoc.getUrl(), StandardCharsets.UTF_8);
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>> Standard  " + submittedKdoc );
+//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>> Decoded " + decoded );
+//
+//
+//        Kdoc savedKdoc = kdocRepository.save(submittedKdoc);
+//        // ToDo: Change to savedkDoc
+//        return new ResponseEntity<Kdoc>(submittedKdoc, HttpStatus.OK);
 //    }
 
-    @RequestMapping(value = "/kdocs/url", method = RequestMethod.POST)
-    ResponseEntity<Kdoc> generateKdocFromUrl(@RequestBody Kdoc url) {
-        // Decode the URL encoded string if it's encoded.
-        String result = java.net.URLDecoder.decode(url.getUrl(), StandardCharsets.UTF_8);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>  " + result);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>  " + url.getUrl());
-//        Kdoc savedKdoc = kdocRepository.save(kdoc);
-        return new ResponseEntity<Kdoc>(url, HttpStatus.OK);
-    }
 
 
 
 
 
-
-
-
-//    @RequestMapping("/documents")
+//    @RequestMapping("/declutter")
 //    public String index()  {
 //
 //        String url = "https://realpython.com/python-sockets/";

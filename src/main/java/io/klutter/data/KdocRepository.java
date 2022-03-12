@@ -15,5 +15,7 @@ public interface KdocRepository extends CrudRepository<Kdoc, Long> {
     @NotNull
     List<Kdoc> findAll();
 
+    Boolean existsKdocByUrl (String url);
+
 
 }
