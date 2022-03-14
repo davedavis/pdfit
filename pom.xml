@@ -154,6 +154,18 @@
             <version>20210307</version>
         </dependency>
 
+<!--&lt;!&ndash;        For WebClient calling internal services&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.projectreactor.netty</groupId>-->
+<!--            <artifactId>reactor-netty</artifactId>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+
 
 
     </dependencies>

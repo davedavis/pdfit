@@ -55,7 +55,8 @@
         <p class="lead">Submit your URL below to get a decluttered, ad-free version optimized for e-ink devices like
           remarkable or kindle.</p>
 
-        <form action="#" th:action="@{/declutter}" th:object="${kdoc}" method="post">
+<!--        <form action="#" th:action="@{/declutter}" th:object="${kdoc}" method="post">-->
+        <form action="#" th:action="@{/}" th:object="${kdoc}" method="post">
           <div class="mb-3">
             <label for="url" class="form-label">URL to declutter</label>
             <input name = "url" type="url" th:field="*{url}" />

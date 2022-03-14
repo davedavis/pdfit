@@ -36,7 +36,8 @@ public class DeclutterService {
 
     @PostMapping(value = "/declutter", produces = {"application/json"})
         // public String declutter(@ModelAttribute Kdoc kdoc, Model model) {
-        ResponseEntity<Kdoc> declutter(@ModelAttribute Kdoc kdoc, Model model) {
+//        ResponseEntity<Kdoc> declutter(@ModelAttribute Kdoc kdoc, Model model) {
+    ResponseEntity<Kdoc> declutter(@RequestBody Kdoc kdoc){
 //        model.addAttribute("kdoc", kdoc);
         System.out.println(kdoc);
         String url = kdoc.getUrl();
@@ -49,7 +50,7 @@ public class DeclutterService {
         else {
             System.out.println("This is a new URL");
 
-            ChromeOptions options = new ChromeOptions();options.addArguments("--headless");
+            ChromeOptions options = new ChromeOptions().addArguments("--headless");
 
             // Using Webdriver
             WebDriverManager.chromedriver().setup();
